@@ -1,6 +1,6 @@
 set(0,'DefaultAxesFontSize', 20)
 set(0,'DefaultTextFontSize', 20)
-
+    
 %% load data
 dist = 10;
 current = 2300;
