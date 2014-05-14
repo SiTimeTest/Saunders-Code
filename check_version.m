@@ -70,9 +70,9 @@ if (need_to_update)
             tmp_filename_end_idx = find(tmp_str == sprintf('\n'));
             filename_end_idx(i) = tmp_filename_end_idx(1) - 1;
             modified_filenames{i} = tmp_str(1:filename_end_idx(i));
-            fprintf('adding file %s...',modified_filenames{i});
+            fprintf('adding file "%s" ...',modified_filenames{i});
             result = git(sprintf('add %s',modified_filenames{i}));
-            fprintf('done\n');
+            fprintf('done!\n');
         end
     end
 
@@ -112,11 +112,11 @@ if (need_to_update)
                 file_format = tmp_untracked_filename((find(tmp_untracked_filename == '.')+1):end);
 
                 if (strcmp(file_format,'m'))
-                    fprintf('adding file %s...',untracked_filenames{i});
+                    fprintf('adding file "%s"...',untracked_filenames{i});
                     result = git(sprintf('add %s',untracked_filenames{i}));
-                    fprintf('done\n');
+                    fprintf('done!\n');
                 else
-                    fprintf('File format .%s is not needed to be tracked\n',file_format);
+                    fprintf('File format ''.%s'' is not needed to be tracked\n',file_format);
                 end
             end
         end
