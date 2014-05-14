@@ -1,5 +1,5 @@
-runinfo.operator = 'JZY';
-runinfo.comments = 'test automated script';
+runinfo.operator = 'Jinze Yu';
+runinfo.comments = 'test automated script last modification';
 % check if files are modified and not up to date
 
 diff_result = git('diff');
