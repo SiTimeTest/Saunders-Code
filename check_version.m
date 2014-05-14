@@ -1,4 +1,4 @@
-runinfo.operator = 'JY';
+runinfo.operator = 'JZ';
 runinfo.comments = 'test automated script';
 % check if files are modified and not up to date
 
