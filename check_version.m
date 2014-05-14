@@ -128,9 +128,10 @@ if (need_to_update)
 
     fprintf('commit now ... ');
     result = git(sprintf('commit -m "%s %s"\n\n',runinfo.comments,datestr(now,'yymmddHHMMSS')));
-    fprintf('done!\n');
+    fprintf('done!\n\n');
 end
 
+fprintf('Finish updating\n');
 
 % parse the result message into three parts:
 % 1. M - filename
