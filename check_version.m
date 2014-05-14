@@ -20,7 +20,7 @@ branch_end_idx_tmp = find(git_status((on_branch_idx + length(on_branch_str)):end
 branch_end_idx = branch_start_idx + branch_end_idx_tmp(1) - 2;
 
 % switch to the operator's branch
-fprintf('Checking out to branch ''%s'' ...',runinfo.operator);
+fprintf('Checking out to branch ''%s'' ... ',runinfo.operator);
 result = git(['checkout -b ',runinfo.operator]);
 if strcmp(result(1:5),'fatal')
 %     fprintf('Branch already exists\n\n');
@@ -125,6 +125,7 @@ if (need_to_update)
 
     fprintf('commit now...\n\n');
     result = git(sprintf('commit -m "%s %s"\n\n',runinfo.comments,datestr(now,'yymmddHHMMSS')));
+    fprintf('done!\n');
 end
 
 
