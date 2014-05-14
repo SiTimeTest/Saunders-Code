@@ -103,7 +103,6 @@ if (need_to_update)
                     fprintf('File format is not needed to be tracked\n')
                 end
             end
-
         end
     end
 
