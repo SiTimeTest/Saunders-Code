@@ -107,7 +107,7 @@ if (need_to_update)
     end
 
     fprintf('commit now...\n');
-    result = git(sprintf('commit -m %s\n',runinfo.comments));
+    result = git(sprintf('commit -m "%s"\n',runinfo.comments));
 end
 
 
