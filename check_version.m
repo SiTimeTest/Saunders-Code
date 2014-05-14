@@ -28,7 +28,7 @@ if strcmp(result(1:5),'fatal')
 else
 %     fprintf('On branch %s\n\n',runinfo.operator);
 end
-fprintf('done!\n');
+fprintf('done!\n\n');
 
 if (need_to_update)
 
