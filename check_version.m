@@ -20,16 +20,19 @@ branch_end_idx_tmp = find(git_status((on_branch_idx + length(on_branch_str)):end
 branch_end_idx = branch_start_idx + branch_end_idx_tmp(1) - 2;
 
 % switch to the operator's branch
-result = git(['checkout -b ',runinfo.operator])
+fprintf('Checking out to branch %s\n',runinfo.operator);
+result = git(['checkout -b ',runinfo.operator]);
 if strcmp(result(1:5),'fatal')
     fprintf('Branch already exists\n');
-    result = git(['checkout ',runinfo.operator])
+    result = git(['checkout ',runinfo.operator]);
 else
     fprintf('On branch %s\n',runinfo.operator);
 end
 
 if (need_to_update)
 
+    fprintf('The current branch needs to update\n');
+    
     % parse git status message
     git_status = git('status');
 
@@ -46,6 +49,7 @@ if (need_to_update)
     if (isempty(for_commit_idx))
         fprintf('Modified files are all to be committed\n');
     else
+        fprintf('Some files are modified and needed to be added before commit\n');
         tmp_add_idx = find(add_commit_idx > for_commit_idx);
         add_idx = add_commit_idx(tmp_add_idx);
 
@@ -66,7 +70,9 @@ if (need_to_update)
             tmp_filename_end_idx = find(tmp_str == sprintf('\n'));
             filename_end_idx(i) = tmp_filename_end_idx(1) - 1;
             modified_filenames{i} = tmp_str(1:filename_end_idx(i));
+            fprintf('adding file %s...',modified_filenames{i});
             result = git(sprintf('add %s',modified_filenames{i}));
+            fprintf('done\n');
         end
     end
 
@@ -77,6 +83,7 @@ if (need_to_update)
     if (isempty(untracked_idx))
         fprintf('No untracked files, ready to commit\n');
     else
+        fprintf('Untracked files exist\n');
         untracked_to_add_idx = strfind(git_status,untracked_to_add);
         tab_idx = find(git_status==sprintf('\t')); % to locate where are the tabs
         tab_for_untracked_idx = find(tab_idx > untracked_to_add_idx);
@@ -105,10 +112,11 @@ if (need_to_update)
                 file_format = tmp_untracked_filename((find(tmp_untracked_filename == '.')+1):end);
 
                 if (strcmp(file_format,'m'))
-                    fprintf('add file: %s\n',untracked_filenames{i});
+                    fprintf('adding file %s...',untracked_filenames{i});
                     result = git(sprintf('add %s',untracked_filenames{i}));
+                    fprintf('done\n');
                 else
-                    fprintf('File format is not needed to be tracked\n')
+                    fprintf('File format .%s is not needed to be tracked\n',file_format);
                 end
             end
         end
