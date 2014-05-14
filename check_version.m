@@ -25,7 +25,7 @@ result = git(['checkout -b ',runinfo.operator]);
 if strcmp(result(1:5),'fatal')
 %     fprintf('Branch already exists\n\n');
     result = git(['checkout ',runinfo.operator])
-    if (strcmp(result(1:5), 'error'))
+    if (strcmp(result(1:5),  'error'))
         need_to_update = 1;
     end
 else
