@@ -1,4 +1,4 @@
-runinfo.operator = 'JZ';
+runinfo.operator = 'JZY';
 runinfo.comments = 'test automated script';
 % check if files are modified and not up to date
 
@@ -131,7 +131,7 @@ if (need_to_update)
     fprintf('done!\n\n');
 end
 
-fprintf('Finish updating\n');
+fprintf('Finish updating.\n');
 
 % parse the result message into three parts:
 % 1. M - filename
