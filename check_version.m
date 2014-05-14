@@ -71,7 +71,7 @@ if (need_to_update)
             tmp_filename_end_idx = find(tmp_str == sprintf('\n'));
             filename_end_idx(i) = tmp_filename_end_idx(1) - 1;
             modified_filenames{i} = tmp_str(1:filename_end_idx(i));
-            fprintf('adding file "%s" ...',modified_filenames{i});
+            fprintf('adding file ''%s'' ... ',modified_filenames{i});
             result = git(sprintf('add %s',modified_filenames{i}));
             fprintf('done!\n\n');
         end
@@ -113,7 +113,7 @@ if (need_to_update)
                 file_format = tmp_untracked_filename((find(tmp_untracked_filename == '.')+1):end);
 
                 if (strcmp(file_format,'m'))
-                    fprintf('adding file "%s"...',untracked_filenames{i});
+                    fprintf('adding file ''%s'' ... ',untracked_filenames{i});
                     result = git(sprintf('add %s',untracked_filenames{i}));
                     fprintf('done!\n\n');
                 else
@@ -123,7 +123,7 @@ if (need_to_update)
         end
     end
 
-    fprintf('commit now...\n\n');
+    fprintf('commit now ... ');
     result = git(sprintf('commit -m "%s %s"\n\n',runinfo.comments,datestr(now,'yymmddHHMMSS')));
     fprintf('done!\n');
 end
