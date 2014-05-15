@@ -108,8 +108,7 @@ if (need_to_track)
                 fprintf('File format ''.%s'' is not needed to be tracked\n\n',file_format);
             end
         end
-    end
- 
+    end 
 end
 
 git_status = git('status');

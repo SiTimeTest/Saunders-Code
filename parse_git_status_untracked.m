@@ -19,5 +19,5 @@ else
         file_names = get_filenames(git_status,filename_start_idx);
     end
 end
-
+ 
 end

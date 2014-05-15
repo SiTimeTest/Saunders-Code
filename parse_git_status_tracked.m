@@ -20,5 +20,5 @@ else
     % Get the filenames to add them
     file_names = get_filenames(git_status,filename_start_idx);
 end
-
+ 
 end

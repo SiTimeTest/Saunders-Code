@@ -10,5 +10,5 @@ tab_for_local_change_idx = find(tab_idx > by_checkout_idx & tab_idx < please_com
 
 filename_start_idx = tab_idx(tab_for_local_change_idx)+1;
 file_names = get_filenames(result_checkout,filename_start_idx);
-
+ 
 end
