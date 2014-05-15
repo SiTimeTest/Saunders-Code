@@ -64,7 +64,7 @@ git_status = git('status');
 
 if (need_to_update)
 
-    fprintf('The current branch needs to update\n\n');
+    fprintf('NEED_TO_UPDATE!\nThe current branch needs to update\n\n');
 
     modified_filenames = parse_git_status_tracked(git_status);
     
@@ -87,7 +87,7 @@ if (need_to_track)
     
     % Up to now, files that are modified, are all added, and need to commit
     % Next step will be check if the 'Untracked files' are necessary to add
-    fprintf('The current branch has some untracked files, checking them now ... \n')
+    fprintf('NEED_TO_TRACK!\nThe current branch has some untracked files, checking them now ... \n')
     untracked_filenames = parse_git_status_untracked(git_status);
     
     if (isempty(untracked_filenames))
