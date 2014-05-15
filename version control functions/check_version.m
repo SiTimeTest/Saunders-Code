@@ -88,11 +88,25 @@ if (need_to_update)
         % Add files
         for i = 1:modified_N
             fprintf('adding file ''%s'' ... ',modified_filenames{i});
-            result = git(sprintf('add %s',modified_filenames{i}));
+            result = git(sprintf('add "%s"',modified_filenames{i}));
             fprintf('done!\n\n');
         end
     end
 
+    deleted_filenames = parse_git_status_deleted(git_status);
+    if (isempty(deleted_filenames))
+        fprintf('Deleted files are all to be committed\n\n');
+    else
+        fprintf('Some files are deleted and needed to be removed before commit\n\n');
+        deleted_N = length(deleted_filenames);
+        % Add files
+        for i = 1:deleted_N
+            fprintf('removing file ''%s'' ... ',deleted_filenames{i});
+            result = git(sprintf('rm "%s"',deleted_filenames{i}));
+            fprintf('done!\n\n');
+        end
+    end
+    
 end
 
 if (need_to_track)
@@ -112,9 +126,13 @@ if (need_to_track)
             tmp_untracked_filename = untracked_filenames{i};
             file_format = tmp_untracked_filename((find(tmp_untracked_filename == '.')+1):end);
             % Select the files with right format to add.
-            if (strcmp(file_format,'m'))
+            if (isempty(file_format))
+                if strcmp(tmp_untracked_filename(end),'/') % this is a folder
+                    result = git(sprintf('add "%s*"',tmp_untracked_filename));
+                end
+            elseif (strcmp(file_format,'m'))
                 fprintf('adding file ''%s'' ... ',untracked_filenames{i});
-                result = git(sprintf('add %s',untracked_filenames{i}));
+                result = git(sprintf('add "%s"',untracked_filenames{i}));
                 fprintf('done!\n\n');
             else
                 fprintf('File format ''.%s'' is not needed to be tracked\n\n',file_format);
