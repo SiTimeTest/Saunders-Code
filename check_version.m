@@ -55,7 +55,7 @@ else
 
             for i = 1:file_N
                 fprintf('restoring file ''%s'' ... ',local_filenames{i});
-                copyfile(sprintf('%s%s',local_backup_path,local_filenames{i}),filepath{i});
+                movefile(sprintf('%s%s',local_backup_path,local_filenames{i}),filepath{i});
                 fprintf('done!\n\n');
             end
 
