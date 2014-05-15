@@ -101,7 +101,6 @@ if (need_to_update)
         fprintf('No untracked files, ready to commit\n\n');
     else
         fprintf('Untracked files exist\n\n');
-        untracked_filenames = get_filenames(git_status,filename_start_idx);
         untracked_N = length(untracked_filenames);
 
         for i = 1:untracked_N
@@ -117,7 +116,7 @@ if (need_to_update)
             end
         end
     end
-
+ 
     fprintf('commit now ... ');
     result = git(sprintf('commit -m "%s %s"\n\n',runinfo.comments,datestr(now,'yymmddHHMMSS')));
     fprintf('done!\n');
