@@ -127,7 +127,7 @@ end
 
 if (need_to_commit)
 
-    fprintf('need to commit, committing now ... ');
+    fprintf('The commit message is "%s %s"\n\ncommitting now ... ',runinfo.comments,datestr(now,'yymmddHHMMSS'));
     result = git(sprintf('commit -m "%s %s"\n\n',runinfo.comments,datestr(now,'yymmddHHMMSS')));
     fprintf('done!\n');
     
