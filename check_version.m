@@ -10,7 +10,7 @@ git_status = git('status');
 current_branch = get_curr_branch(git_status);
 
 if (strcmp(current_branch,runinfo.operator))
-    fprintf('The current branch is the operator''s branch!\n');
+    fprintf('The current branch is the operator''s branch!\n\n');
 else
     % switch to the operator's branch
     fprintf('Checking out to branch ''%s'' ... \n',runinfo.operator);
