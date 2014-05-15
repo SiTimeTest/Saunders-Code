@@ -93,6 +93,20 @@ if (need_to_update)
         end
     end
 
+    deleted_filenames = parse_git_status_deleted(git_status);
+    if (isempty(deleted_filenames))
+        fprintf('Deleted files are all to be committed\n\n');
+    else
+        fprintf('Some files are deleted and needed to be removed before commit\n\n');
+        deleted_N = length(deleted_filenames);
+        % Add files
+        for i = 1:deleted_N
+            fprintf('removing file ''%s'' ... ',deleted_filenames{i});
+            result = git(sprintf('rm %s',deleted_filenames{i}));
+            fprintf('done!\n\n');
+        end
+    end
+    
 end
 
 if (need_to_track)
