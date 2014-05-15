@@ -112,11 +112,7 @@ if (need_to_track)
             tmp_untracked_filename = untracked_filenames{i};
             file_format = tmp_untracked_filename((find(tmp_untracked_filename == '.')+1):end);
             % Select the files with right format to add.
-            if (isempty(file_format))
-                if strcmp(tmp_untracked_filename(end),'/') % this is a folder
-                    result = git(sprintf('add "%s*"',tmp_untracked_filename));
-                end
-            elseif (strcmp(file_format,'m'))
+            if (strcmp(file_format,'m'))
                 fprintf('adding file ''%s'' ... ',untracked_filenames{i});
                 result = git(sprintf('add %s',untracked_filenames{i}));
                 fprintf('done!\n\n');
