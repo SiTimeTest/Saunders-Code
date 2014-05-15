@@ -14,7 +14,7 @@ untracked_filenames = parse_git_status_untracked(git_status);
 if (isempty(untracked_filenames))
     need_to_track = 0;
 else
-    fprintf('Some untracked files exist, check is needed to track them\n');
+    fprintf('Some untracked files exist, check is needed to track them\n\n');
     need_to_track = 1;
 end
 
