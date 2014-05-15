@@ -114,9 +114,24 @@ end
 
 git_status = git('status');
 
-fprintf('commit now ... ');
-result = git(sprintf('commit -m "%s %s"\n\n',runinfo.comments,datestr(now,'yymmddHHMMSS')));
-fprintf('done!\n');
+nothing_to_commit = 'nothing to commit';
+to_be_committed = 'Changes to be committed:';
+
+nothing_to_commit_idx = strfind(git_status,nothing_to_commit);
+to_be_committed_idx = strfind(git_status,to_be_committed);
+if (isempty(nothing_to_commit_idx) && ~isempty(to_be_committed_idx))
+    need_to_commit = 1;
+else
+    need_to_commit = 0;
+end
+
+if (need_to_commit)
+
+    fprintf('need to commit, committing now ... ');
+    result = git(sprintf('commit -m "%s %s"\n\n',runinfo.comments,datestr(now,'yymmddHHMMSS')));
+    fprintf('done!\n');
+    
+end
 
 
 
