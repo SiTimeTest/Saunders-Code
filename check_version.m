@@ -58,25 +58,14 @@ else
 end
 
 % check if files are modified and not up to date
-
-diff_result = git('diff');
-if isempty(diff_result)
-    fprintf('current version is up to date\n\n');
-    need_to_update = 0;
-else
-    fprintf('current version is NOT up to date\n\n');
-    need_to_update = 1;
-end
-
+% parse git status message
+git_status = git('status');
+[need_to_update, need_to_track] = check_file_system_status(git_status);
 
 if (need_to_update)
 
     fprintf('The current branch needs to update\n\n');
-    
-    % parse git status message
-    git_status = git('status');
 
-    
     modified_filenames = parse_git_status_tracked(git_status);
     
     if (isempty(modified_filenames))
@@ -92,6 +81,10 @@ if (need_to_update)
         end
     end
 
+end
+
+if (need_to_track)
+    
     % Up to now, files that are modified, are all added, and need to commit
     % Next step will be check if the 'Untracked files' are necessary to add
     
@@ -117,10 +110,14 @@ if (need_to_update)
         end
     end
  
-    fprintf('commit now ... ');
-    result = git(sprintf('commit -m "%s %s"\n\n',runinfo.comments,datestr(now,'yymmddHHMMSS')));
-    fprintf('done!\n');
 end
+
+git_status = git('status');
+
+fprintf('commit now ... ');
+result = git(sprintf('commit -m "%s %s"\n\n',runinfo.comments,datestr(now,'yymmddHHMMSS')));
+fprintf('done!\n');
+
 
 
 % parse the result message into three parts:
