@@ -1,5 +1,17 @@
-runinfo.operator = 'JZ';  
-runinfo.comments = 'test automated script, add more stuff';
+function check_version(runinfo)
+% 
+% runinfo.operator = 'JinzeYu';  
+% runinfo.comments = 'test automated script, add more stuff';
+
+
+disp(' ')
+disp('************************************************************************************')
+disp(' ')
+disp(['                      Version check started on: ',datestr(now)])
+disp(' ')
+disp('************************************************************************************')
+disp(' ')
+
 
 local_backup_path = 'C:\Users\jinzey\Documents\Saunder''s Code Version Control\';
 
@@ -20,7 +32,7 @@ else
         result_checkout = git(['checkout ',runinfo.operator]);
 
         if (strcmp(result_checkout(1:5),'error'))
-            fprintf('Local changes exists, need to back up first\n');
+            fprintf('Local changes exists, need to back up first\n\n');
             % back up the modified files into a local backup folder, then
             % 'stash', then switch to the operator's branch, then copy the
             % files back, and delete them in the backup path
@@ -44,7 +56,7 @@ else
             for i = 1:file_N
                 fprintf('restoring file ''%s'' ... ',local_filenames{i});
                 copyfile(sprintf('%s%s',local_backup_path,local_filenames{i}),filepath{i});
-                fprintf('done!\n');
+                fprintf('done!\n\n');
             end
 
             fprintf('restorage is done!\n');
@@ -132,7 +144,13 @@ if (need_to_commit)
     
 end
 
-
+disp(' ')
+disp('************************************************************************************')
+disp(' ')
+disp(['                      Version check ended on: ',datestr(now)])
+disp(' ')
+disp('************************************************************************************')
+disp(' ')
 
 % parse the result message into three parts:
 % 1. M - filename
